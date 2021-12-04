@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Jerk Settings
   m_EditorClassIdentifier: 
   _directForce: 20
-  _upForce: 2
-  _durationInSeconds: 0.1
+  _upForce: 0.2
+  _durationInSeconds: 1

@@ -28,6 +28,8 @@ namespace Gamekit2D
             }
         }
 
+        public JerkSettings JerkSettings => _jerkSettings;
+
         public SpriteRenderer spriteRenderer;
         public Damageable damageable;
         public Damager meleeDamager;
@@ -550,7 +552,7 @@ namespace Gamekit2D
                 m_MoveVector.y -= jumpAbortSpeedReduction * Time.deltaTime;
             }
         }
-
+        
         public void AirborneHorizontalMovement()
         {
             float desiredSpeed = PlayerInput.Instance.Horizontal.Value * maxSpeed;
@@ -672,7 +674,7 @@ namespace Gamekit2D
             {
                 int directionMultiplier = IsDirectLook ? 1 : -1;
                 SetHorizontalMovement(_jerkSettings.DirectForce * directionMultiplier);
-                m_Animator.SetTrigger("Jerk");
+                m_Animator.SetBool("Jerk", true);
                 CancelJerk();
             }
         }
@@ -681,7 +683,7 @@ namespace Gamekit2D
         {
             var timespanDelay = TimeSpan.FromSeconds(_jerkSettings.DurationInSeconds);
             await Task.Delay(timespanDelay);
-            m_Animator.SetTrigger("CancelJerk");
+            m_Animator.SetBool("Jerk", false);
         }
 
 
