@@ -208,6 +208,20 @@ namespace Gamekit2D
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
 
+
+            
+            EditorGUILayout.BeginVertical(GUI.skin.box);
+
+            EditorGUI.indentLevel++;
+            
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("_jerkSettings"));
+
+            EditorGUI.indentLevel--;
+
+            EditorGUILayout.EndVertical();
+
+
+
             EditorGUILayout.BeginVertical(GUI.skin.box);
             EditorGUI.indentLevel++;
 

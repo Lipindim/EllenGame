@@ -9,6 +9,8 @@ namespace Gamekit2D
             get { return s_Instance; }
         }
 
+        public InputButton Jerk => _jerk;
+
         protected static PlayerInput s_Instance;
     
     
@@ -21,6 +23,9 @@ namespace Gamekit2D
         public InputButton Jump = new InputButton(KeyCode.Space, XboxControllerButtons.A);
         public InputAxis Horizontal = new InputAxis(KeyCode.D, KeyCode.A, XboxControllerAxes.LeftstickHorizontal);
         public InputAxis Vertical = new InputAxis(KeyCode.W, KeyCode.S, XboxControllerAxes.LeftstickVertical);
+
+        [SerializeField] private InputButton _jerk = new InputButton(KeyCode.J, XboxControllerButtons.Rightstick);
+
         [HideInInspector]
         public DataSettings dataSettings;
 
@@ -60,6 +65,7 @@ namespace Gamekit2D
             MeleeAttack.Get(fixedUpdateHappened, inputType);
             RangedAttack.Get(fixedUpdateHappened, inputType);
             Jump.Get(fixedUpdateHappened, inputType);
+            Jerk.Get(fixedUpdateHappened, inputType);
             Horizontal.Get(inputType);
             Vertical.Get(inputType);
 
@@ -80,6 +86,7 @@ namespace Gamekit2D
             GainControl(Jump);
             GainControl(Horizontal);
             GainControl(Vertical);
+            GainControl(Jerk);
         }
 
         public override void ReleaseControl(bool resetValues = true)
@@ -93,6 +100,7 @@ namespace Gamekit2D
             ReleaseControl(Jump, resetValues);
             ReleaseControl(Horizontal, resetValues);
             ReleaseControl(Vertical, resetValues);
+            ReleaseControl(Jerk, resetValues);
         }
 
         public void DisableMeleeAttacking()

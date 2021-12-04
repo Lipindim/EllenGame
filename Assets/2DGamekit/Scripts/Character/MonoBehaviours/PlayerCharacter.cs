@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -18,6 +20,14 @@ namespace Gamekit2D
             get { return m_InventoryController; }
         }
 
+        public bool IsDirectLook
+        {
+            get
+            {
+                return !_spriteRenderer.flipX;
+            }
+        }
+
         public SpriteRenderer spriteRenderer;
         public Damageable damageable;
         public Damager meleeDamager;
@@ -25,6 +35,7 @@ namespace Gamekit2D
         public Transform facingRightBulletSpawnPoint;
         public BulletPool bulletPool;
         public Transform cameraFollowTarget;
+        [SerializeField] private JerkSettings _jerkSettings;
 
         public float maxSpeed = 10f;
         public float groundAcceleration = 100f;
@@ -87,10 +98,11 @@ namespace Gamekit2D
         protected float m_CamFollowVerticalSpeed;
         protected float m_VerticalCameraOffsetTimer;
         protected InventoryController m_InventoryController;
-
         protected Checkpoint m_LastCheckpoint = null;
         protected Vector2 m_StartingPosition = Vector2.zero;
         protected bool m_StartingFacingLeft = false;
+
+        private SpriteRenderer _spriteRenderer;
 
         protected bool m_InPause = false;
 
@@ -124,6 +136,7 @@ namespace Gamekit2D
             m_Capsule = GetComponent<CapsuleCollider2D>();
             m_Transform = transform;
             m_InventoryController = GetComponent<InventoryController>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
 
             m_CurrentBulletSpawnPoint = spriteOriginallyFacesLeft ? facingLeftBulletSpawnPoint : facingRightBulletSpawnPoint;
         }
@@ -652,6 +665,25 @@ namespace Gamekit2D
                 m_ShootingCoroutine = null;
             }
         }
+
+        public void TryJerk()
+        {
+            if (PlayerInput.Instance.Jerk.Down)
+            {
+                int directionMultiplier = IsDirectLook ? 1 : -1;
+                SetHorizontalMovement(_jerkSettings.DirectForce * directionMultiplier);
+                m_Animator.SetTrigger("Jerk");
+                CancelJerk();
+            }
+        }
+
+        private async void CancelJerk()
+        {
+            var timespanDelay = TimeSpan.FromSeconds(_jerkSettings.DurationInSeconds);
+            await Task.Delay(timespanDelay);
+            m_Animator.SetTrigger("CancelJerk");
+        }
+
 
         public void ForceNotHoldingGun()
         {
