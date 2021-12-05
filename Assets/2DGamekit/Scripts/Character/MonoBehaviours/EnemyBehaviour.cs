@@ -13,8 +13,17 @@ namespace Gamekit2D
     {
         static Collider2D[] s_ColliderCache = new Collider2D[16];
 
-        public Vector3 moveVector { get { return m_MoveVector; } }
-        public Transform Target { get { return m_Target; } }
+        public Vector3 moveVector => m_MoveVector;
+        public Transform Target =>  m_Target;
+        public float PatrolDistance => _patrolDistance;
+
+        public bool IsLookToRight
+        {
+            get
+            {
+                return !m_SpriteRenderer.flipX;
+            }
+        }
 
         [Tooltip("If the sprite face left on the spritesheet, enable this. Otherwise, leave disabled")]
         public bool spriteFaceLeft = false;
@@ -22,6 +31,7 @@ namespace Gamekit2D
         [Header("Movement")]
         public float speed;
         public float gravity = 10.0f;
+        [SerializeField] private float _patrolDistance;
 
         [Header("References")]
         [Tooltip("If the enemy will be using ranged attack, set a prefab of the projectile it should use")]

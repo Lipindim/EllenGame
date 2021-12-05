@@ -20,7 +20,7 @@ namespace Gamekit2D
             get { return m_InventoryController; }
         }
 
-        public bool IsDirectLook
+        public bool IsLookToRight
         {
             get
             {
@@ -150,6 +150,7 @@ namespace Gamekit2D
             m_FlickeringWait = new WaitForSeconds(flickeringDuration);
 
             meleeDamager.DisableDamage();
+            //meleeDamager.OnDamageableHit.AddListener(OnDamageableHit);
 
             m_ShotSpawnGap = 1f / shotsPerSecond;
             m_NextShotTime = Time.time;
@@ -171,6 +172,25 @@ namespace Gamekit2D
 
             m_StartingPosition = transform.position;
             m_StartingFacingLeft = GetFacing() < 0.0f;
+        }
+
+        private void OnDamageableHit(Damager damager, Damageable damageable)
+        {
+            if (JerkSettings.Upgraded)
+                IncreaseUpForce();
+        }
+
+        private async void IncreaseUpForce()
+        {
+            float remainingTime = JerkSettings.DurationExtraUpForce;
+            do
+            {
+                IncrementVerticalMovement(JerkSettings.ExtraUpForceOnHit);
+                remainingTime -= Time.deltaTime;
+                await Task.Delay(1);
+                Debug.Log("Повышаю градус");
+            }
+            while (remainingTime > 0);
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -672,11 +692,18 @@ namespace Gamekit2D
         {
             if (PlayerInput.Instance.Jerk.Down)
             {
-                int directionMultiplier = IsDirectLook ? 1 : -1;
-                SetHorizontalMovement(_jerkSettings.DirectForce * directionMultiplier);
+                int directionMultiplier = IsLookToRight ? 1 : -1;
+                SetHorizontalMovement(_jerkSettings.ForwardSpeed * directionMultiplier);
                 m_Animator.SetBool("Jerk", true);
-                CancelJerk();
+                if (!JerkSettings.Upgraded)
+                    CancelJerk();
             }
+        }
+
+        public void TryBreakJerk()
+        {
+            if (PlayerInput.Instance.Jerk.Up)
+                m_Animator.SetBool("Jerk", false);
         }
 
         private async void CancelJerk()
@@ -783,7 +810,7 @@ namespace Gamekit2D
         public void EnableMeleeAttack()
         {
             meleeDamager.EnableDamage();
-            meleeDamager.disableDamageAfterHit = true;
+            //meleeDamager.disableDamageAfterHit = true;
             meleeAttackAudioPlayer.PlayRandomSound();
         }
 

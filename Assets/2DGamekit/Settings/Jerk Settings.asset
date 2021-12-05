@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 700d3d35b088b854891960494e424faf, type: 3}
   m_Name: Jerk Settings
   m_EditorClassIdentifier: 
-  _directForce: 20
-  _upForce: 0.2
-  _durationInSeconds: 1
+  _forwardSpeed: 20
+  _downSpeed: 5
+  _durationInSeconds: 0.3
+  _upgraded: 1
+  _forwardSpeedUpgraded: 15
+  _extraUpForceOnHit: 10
+  _durationExtraUpForce: 0.3
