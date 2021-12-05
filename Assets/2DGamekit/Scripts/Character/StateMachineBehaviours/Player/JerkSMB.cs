@@ -9,14 +9,23 @@ public class JerkSMB : SceneLinkedSMB<PlayerCharacter>
 
     public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        _currentUpdate = 0;
         base.OnSLStateEnter(animator, stateInfo, layerIndex);
         m_MonoBehaviour.EnableMeleeAttack();
         m_MonoBehaviour.SetVerticalMovement(0);
         m_MonoBehaviour.meleeDamager.OnDamageableHit.AddListener(OnDamageableHit);
     }
 
+    public override void OnSLStatePostEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnSLStatePostEnter(animator, stateInfo, layerIndex);
+    }
+
+
+    private int _currentUpdate = 0;
     public override void OnSLStateNoTransitionUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         if (m_MonoBehaviour.JerkSettings.Upgraded)
         {
             m_MonoBehaviour.TryBreakJerk();

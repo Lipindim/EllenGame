@@ -28,5 +28,11 @@ public class JerkSettings : ScriptableObject
     public bool Upgraded => _upgraded;
     public float ExtraUpForceOnHit => _extraUpForceOnHit;
     public float DurationExtraUpForce => _durationExtraUpForce;
+
+    public void Upgrade()
+    {
+        _upgraded = true;
+    }
+
 }
 
