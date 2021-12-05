@@ -15,7 +15,6 @@ MonoBehaviour:
   _forwardSpeed: 20
   _downSpeed: 5
   _durationInSeconds: 0.2
-  _upgraded: 0
   _forwardSpeedUpgraded: 15
   _extraUpForceOnHit: 30
   _durationExtraUpForce: 0.3
