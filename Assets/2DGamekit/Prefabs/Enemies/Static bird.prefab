@@ -900,7 +900,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!114 &114634561928932616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,6 +932,7 @@ MonoBehaviour:
   spriteFaceLeft: 0
   speed: 0
   gravity: 0
+  _patrolDistance: 0
   projectilePrefab: {fileID: 0}
   viewDirection: 0
   viewFov: 360
