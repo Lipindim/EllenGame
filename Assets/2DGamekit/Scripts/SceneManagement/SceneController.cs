@@ -87,6 +87,11 @@ namespace Gamekit2D
             Instance.StartCoroutine(Instance.Transition(Instance.m_CurrentZoneScene.name, true, Instance.m_ZoneRestartDestinationTag, TransitionPoint.TransitionType.DifferentZone));
         }
 
+        public void StartLevel(int sceneIndex)
+        {
+            SceneManager.LoadScene(sceneIndex);
+        }
+
         public static void RestartZoneWithDelay(float delay, bool resetHealth = true)
         {
             Instance.StartCoroutine(CallWithDelay(delay, RestartZone, resetHealth));
@@ -146,10 +151,10 @@ namespace Gamekit2D
                 Debug.LogWarning("Entering Transform's location has not been set.");
                 return;
             }
-            Transform entranceLocation = entrance.transform;
-            Transform enteringTransform = entrance.transitioningGameObject.transform;
-            enteringTransform.position = entranceLocation.position;
-            enteringTransform.rotation = entranceLocation.rotation;
+            //Transform entranceLocation = entrance.transform;
+            //Transform enteringTransform = entrance.transitioningGameObject.transform;
+            //enteringTransform.position = entranceLocation.position;
+            //enteringTransform.rotation = entranceLocation.rotation;
         }
 
         protected void SetupNewScene(TransitionPoint.TransitionType transitionType, SceneTransitionDestination entrance)

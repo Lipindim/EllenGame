@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97933d85c6acddc4bb95f77ca8cc0280, type: 3}
   m_Name: ID1
   m_EditorClassIdentifier: 
-  language: 
-  phrases: []
+  language: English
+  phrases:
+  - key: Text1
+    value: Press "J" while jumping to dash
+  - key: Text2
+    value: Hold "J" while jumping to make a long dash. It only works as long as you
+      keep the button pressed. You can change the direction of move.

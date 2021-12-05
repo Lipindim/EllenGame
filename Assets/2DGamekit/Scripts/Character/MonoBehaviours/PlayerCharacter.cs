@@ -172,6 +172,7 @@ namespace Gamekit2D
 
             m_StartingPosition = transform.position;
             m_StartingFacingLeft = GetFacing() < 0.0f;
+            JerkSettings.ResetUpgrade();
         }
 
         private void OnDamageableHit(Damager damager, Damageable damageable)
