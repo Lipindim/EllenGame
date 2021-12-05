@@ -688,21 +688,26 @@ namespace Gamekit2D
             }
         }
 
-        public void TryJerk()
+        public bool TryJerk()
         {
             if (PlayerInput.Instance.Jerk.Down)
             {
                 int directionMultiplier = IsLookToRight ? 1 : -1;
                 SetHorizontalMovement(_jerkSettings.ForwardSpeed * directionMultiplier);
                 m_Animator.SetBool("Jerk", true);
+
                 if (!JerkSettings.Upgraded)
                     CancelJerk();
+
+                return true;
             }
+
+            return false;
         }
 
         public void TryBreakJerk()
         {
-            if (PlayerInput.Instance.Jerk.Up)
+            if (!PlayerInput.Instance.Jerk.Held)
                 m_Animator.SetBool("Jerk", false);
         }
 

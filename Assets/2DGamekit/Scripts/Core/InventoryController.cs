@@ -99,7 +99,7 @@ namespace Gamekit2D
             m_InventoryItems.Clear();
         }
 
-        InventoryEvent GetInventoryEvent(string key)
+        public InventoryEvent GetInventoryEvent(string key)
         {
             foreach (var iv in inventoryEvents)
             {

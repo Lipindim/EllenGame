@@ -22,8 +22,12 @@ namespace Gamekit2D
         {
             if (TryChangeDirection())
             {
-                m_MonoBehaviour.SetHorizontalSpeed(m_MonoBehaviour.speed * _currentDirection);
+                m_MonoBehaviour.SetHorizontalSpeed(m_MonoBehaviour.speed * -1);
                 m_MonoBehaviour.UpdateFacing();
+            }
+            else
+            {
+                m_MonoBehaviour.SetHorizontalSpeed(m_MonoBehaviour.speed * 1);
             }
         }
 

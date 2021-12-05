@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 700d3d35b088b854891960494e424faf, type: 3}
-  m_Name: Jerk Settings
+  m_Script: {fileID: 11500000, guid: 97933d85c6acddc4bb95f77ca8cc0280, type: 3}
+  m_Name: bla-bla
   m_EditorClassIdentifier: 
-  _forwardSpeed: 20
-  _downSpeed: 5
-  _durationInSeconds: 0.2
-  _upgraded: 0
-  _forwardSpeedUpgraded: 15
-  _extraUpForceOnHit: 30
-  _durationExtraUpForce: 0.3
+  language: English
+  phrases:
+  - key: ID1
+    value: BLa!
